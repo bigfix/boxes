@@ -32,7 +32,7 @@ The following examples create a box with the 9.1.1117.0 IBM Endpoint Manager Roo
 ### -db2
 This example uses the [`packer/redhat65x64-db2.json](redhat65x64-db2.json) template.
 
-First, it creates a Red Hat Enterprise Linux 6.5 x86_64 base box with DB2 10.5 FP2. Then, it provisions the base with the Root Server. The iso and application are hosted on an internal web server.
+First, it creates a Red Hat Enterprise Linux 6.5 x86_64 base box with DB2 10.5 FP2. Then, it provisions the base with the Root Server. The iso, application, and license are hosted on an internal web server.
 
 On `stitch`:
 
