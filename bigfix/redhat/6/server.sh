@@ -42,7 +42,6 @@ yum install -y fontconfig.x86_64 libXext.x86_64 libXrender.x86_64
 curl http://platdev.sfolab.ibm.com/devtools/webui/license.pvk -o /home/vagrant/license.pvk
 curl http://platdev.sfolab.ibm.com/devtools/webui/license.crt -o /home/vagrant/license.crt
 
-echo "Creating response file for server installer"
 cat > /home/vagrant/iem.rsp << OHANA_MEANS_FAMILY
 BES_PREREQ_INSTALL="install"
 LA_ACCEPT="true"
@@ -55,15 +54,15 @@ BES_WWW_FOLDER="/var/opt/BESServer"
 WR_WWW_FOLDER="/var/opt/BESWebReportsServer"
 WR_WWW_PORT="80"
 DB2_ADMIN_USER="db2inst1"
-DB2_ADMIN_PWD="{obf}YmlnZml4"
+DB2_ADMIN_PWD="bigfix"
 DB2INST_CONFIGURE="yes"
 TEM_USER_NAME="bigfix"
-TEM_USER_PWD="{obf}YmlnZml4"
+TEM_USER_PWD="bigfix"
 CONF_FIREWALL="no"
 BES_SETUP_TYPE="prodlic"
 BES_CERT_FILE="/home/vagrant/license.crt"
 BES_LICENSE_PVK="/home/vagrant/license.pvk"
-BES_LICENSE_PVK_PWD="{obf}YmlnZml4"
+BES_LICENSE_PVK_PWD="bigfix"
 ADV_MASTHEAD_DEFAULT="true"
 BES_LIC_FOLDER="./license"
 DB2_PORT="50000"
