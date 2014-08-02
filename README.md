@@ -59,7 +59,7 @@ $ cd boxes/packer
 $ BIGFIX_VERSION="9.1.1117.0" packer build redhat65x64-server.json
 $ cd -
 $ vagrant box add builds/virtualbox/redhat65x64-server.box --name bigfix/redhat65x64-server91patch3
-$ cd vagrant/server/redhat
+$ cd vagrant/server/redhat/latest
 $ vagrant up
 ```
 
