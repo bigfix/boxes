@@ -1,0 +1,8 @@
+language: python
+python:
+  - "3.4"
+before_install: wget --no-check-certificate https://dl.bintray.com/mitchellh/packer/0.6.1_linux_amd64.zip -O packer.zip && unzip -d packer packer.zip
+before_script: export PATH=$PATH:$PWD/packer
+script: nosetests test --verbose
+notifications:
+  email: false
