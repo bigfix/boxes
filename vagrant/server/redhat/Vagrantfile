@@ -1,3 +1,6 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
 VAGRANTFILE_API_VERSION = "2"
 
 BIGFIX_SERVER="http://platdev.sfolab.ibm.com/share/pT5P2/server.sh"
