@@ -16,7 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.customize ["modifyvm", :id, "--memory", 2048]
     v.customize ["modifyvm", :id, "--cpus", 2]
 
-    # See http://serverfault.com/questions/495914/vagrant-slow-internet-connection-in-guest
+    # http://serverfault.com/questions/495914/vagrant-slow-internet-connection-in-guest
     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
   end
 
