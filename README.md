@@ -14,11 +14,14 @@ The nomenclature of the packer templates is:
 {os}{version}{architecture}-{application}
 ```
 
-Depending on the desired box, there may be additional pre-requisite applications.
+Depending on the desired box, there may be additional prerequisites.
 
-The templates are created with hardcoded values for internal usage. However, the scripts have been specifically organized for easy configuration.
+The templates are created with hardcoded values for internal usage. However, the scripts have been organized for easy configuration.
 
 Each template has variables at the top for configuring the name and iso. And as previously mentioned, a template may have provisioner scripts that require specific applications. These scripts will be located in the [`bigfix/`](bigfix/) folder.
+
+#### Vagrantfile
+The Vagrantfiles are designed to be as atomic as possible. Specifically, the specifications of the box should be encapsulated in the file. If a box requires configuration, it can be be specified via editing the top of the Vagrantfile and/or providing an environment variable.
 
 ## Example
 Tested on `stitch` a Windows 7 environment:

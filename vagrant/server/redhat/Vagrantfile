@@ -2,6 +2,7 @@ VAGRANTFILE_API_VERSION = "2"
 
 BIGFIX_SERVER="http://platdev.sfolab.ibm.com/share/pT5P2/server.sh"
 # BIGFIX_SERVER="https://github.com/bigfix/boxes/blob/master/bigfix/redhat/6/server.sh"
+BIGFIX_VERSION=[ENV["BIGFIX_VERSION"] || "9.1.1117.0"]
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "bigfix/redhat65x64-db2"
@@ -21,6 +22,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision "shell" do |s|
     s.path = BIGFIX_SERVER
-    s.args = [ENV["BIGFIX_VERSION"] || "9.1.1117.0"]
+    s.args = BIGFIX_VERSION
   end
 end
