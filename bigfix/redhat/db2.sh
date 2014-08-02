@@ -3,32 +3,32 @@
 curl -O http://platdev.sfolab.ibm.com/devtools/db2/v10.5fp2_linuxx64_server_r.tar.gz
 
 cat > /home/vagrant/db2.rsp << NO_ONE_GETS_LEFT_BEHIND
-LIC_AGREEMENT="ACCEPT"
-PROD="DB2_SERVER_EDITION"
-FILE="/opt/ibm/db2/V10.5"
-INSTALL_TYPE="TYPICAL"
-DAS_CONTACT_LIST="LOCAL"
-DAS_USERNAME="dasusr1"
-DAS_GROUP_NAME="dasadm1"
-DAS_HOME_DIRECTORY="/home/dasusr1"
-DAS_PASSWORD="bigfix"
-INSTANCE="inst1"
-inst1.TYPE="ese"
-inst1.NAME="db2inst1"
-inst1.GROUP_NAME="db2iadm1"
-inst1.HOME_DIRECTORY="/home/db2inst1"
-inst1.PASSWORD="bigfix"
-inst1.AUTOSTART="YES"
-inst1.SVCENAME="db2c_db2inst1"
-inst1.PORT_NUMBER="50000"
-inst1.FCM_PORT_NUMBER="60000"
-inst1.MAX_LOGICAL_NODES="4"
-inst1.CONFIGURE_TEXT_SEARCH="NO"
-inst1.FENCED_USERNAME="db2fenc1"
-inst1.FENCED_GROUP_NAME="db2fadm1"
-inst1.FENCED_HOME_DIRECTORY="/home/db2fenc1"
-inst1.FENCED_PASSWORD="bigfix"
-LANG="EN"
+LIC_AGREEMENT=ACCEPT
+PROD=DB2_SERVER_EDITION
+FILE=/opt/ibm/db2/V10.5
+INSTALL_TYPE=TYPICAL
+DAS_CONTACT_LIST=LOCAL
+DAS_USERNAME=dasusr1
+DAS_GROUP_NAME=dasadm1
+DAS_HOME_DIRECTORY=/home/dasusr1
+DAS_PASSWORD=bigfix
+INSTANCE=inst1
+inst1.TYPE=ese
+inst1.NAME=db2inst1
+inst1.GROUP_NAME=db2iadm1
+inst1.HOME_DIRECTORY=/home/db2inst1
+inst1.PASSWORD=bigfix
+inst1.AUTOSTART=YES
+inst1.SVCENAME=db2c_db2inst1
+inst1.PORT_NUMBER=50000
+inst1.FCM_PORT_NUMBER=60000
+inst1.MAX_LOGICAL_NODES=4
+inst1.CONFIGURE_TEXT_SEARCH=NO
+inst1.FENCED_USERNAME=db2fenc1
+inst1.FENCED_GROUP_NAME=db2fadm1
+inst1.FENCED_HOME_DIRECTORY=/home/db2fenc1
+inst1.FENCED_PASSWORD=bigfix
+LANG=EN
 NO_ONE_GETS_LEFT_BEHIND
 
 tar -xf v10.5fp2_linuxx64_server_r.tar.gz
