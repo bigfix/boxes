@@ -1,0 +1,26 @@
+VAGRANTFILE_API_VERSION = "2"
+
+BIGFIX_SERVER="http://platdev.sfolab.ibm.com/share/pT5P2/server.sh"
+# BIGFIX_SERVER="https://github.com/bigfix/boxes/blob/master/bigfix/redhat/6/server.sh"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "bigfix/redhat65x64-db2"
+  config.vm.hostname = "bigfix-server.test"
+
+  config.vm.provider "virtualbox" do |v, override|
+    v.gui = false
+    v.customize ["modifyvm", :id, "--memory", 2048]
+    v.customize ["modifyvm", :id, "--cpus", 2]
+
+    # See http://serverfault.com/questions/495914/vagrant-slow-internet-connection-in-guest
+    v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+  end
+
+  config.vm.network :forwarded_port, guest: 52311, host: 52311
+  config.vm.network :forwarded_port, guest: 80, host: 8080
+
+  config.vm.provision "shell" do |s|
+    s.path = BIGFIX_SERVER
+    s.args = [ENV["BIGFIX_VERSION"] || "9.1.1117.0"]
+  end
+end
