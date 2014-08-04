@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/bigfix/boxes.svg?branch=master)](https://travis-ci.org/bigfix/boxes)
+
 A collection of packer templates to create vagrant boxes for building and installing IBM Endpoint Manager
 
 # Usage
