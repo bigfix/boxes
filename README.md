@@ -35,7 +35,7 @@ Tested on `stitch` a Windows 7 environment:
 The following examples create a box with the 9.1.1117.0 IBM Endpoint Manager Root Server. 
 
 ### -db2
-This example uses the [`packer/redhat65x64-db2.json`](redhat65x64-db2.json) template.
+This example uses the [`packer/redhat65x64-db2.json`](packer/redhat65x64-db2.json) template.
 
 First, it creates a Red Hat Enterprise Linux 6.5 x86_64 base box with DB2 10.5 FP2. Then, it provisions the base with the Root Server. The iso, application, and license are hosted on an internal web server.
 
@@ -52,7 +52,7 @@ $ BIGFIX_VERSION="9.1.1117.0" vagrant up
 ```
 
 ### -server
-This example uses the [`packer/redhat65x64-server.json`](redhat65x64-db2.json) template.
+This example uses the [`packer/redhat65x64-server.json`](packer/redhat65x64-db2.json) template.
 
 Unlike [-db2](#-db2), this example creates a base with the Root Server already installed.
 
