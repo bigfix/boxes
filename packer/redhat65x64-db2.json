@@ -14,7 +14,7 @@
       "output_directory": "output-{{ user `name` }}",
 
       "boot_command": [
-        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/redhat/65/ks-db2.cfg<enter><wait>"
+        "<tab> noapic text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/redhat/65/ks-db2.cfg<enter><wait>"
       ],
       "boot_wait": "10s",
 
