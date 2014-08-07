@@ -1,0 +1,88 @@
+{
+  "variables": {
+    "name": "ubuntu1404x64-build",
+
+    "iso_url_hodor": "http://platdev.sfolab.ibm.com/iso/Linux/Ubuntu/Ubuntu%2014.04/.iso",
+    "iso_url": "http://releases.ubuntu.com/14.04/ubuntu-14.04.1-server-amd64.iso",
+    "iso_checksum": "401c5f6666fe2879ac3a9a3247b487723410cf88",
+    "iso_checksum_type": "sha1"
+  },
+
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "vm_name": "{{ user `name` }}",
+      "output_directory": "output-{{ user `name` }}",
+
+      "boot_command": [
+        "<esc><wait>",
+        "<esc><wait>",
+        "<enter><wait>",
+        "/install/vmlinuz<wait>",
+        " auto<wait>",
+        " console-setup/ask_detect=false<wait>",
+        " console-setup/layoutcode=us<wait>",
+        " console-setup/modelcode=pc105<wait>",
+        " debconf/frontend=noninteractive<wait>",
+        " debian-installer=en_US<wait>",
+        " fb=false<wait>",
+        " initrd=/install/initrd.gz<wait>",
+        " kbd-chooser/method=us<wait>",
+        " keyboard-configuration/layout=USA<wait>",
+        " keyboard-configuration/variant=USA<wait>",
+        " locale=en_US<wait>",
+        " netcfg/get_domain=vm<wait>",
+        " netcfg/get_hostname=vagrant<wait>",
+        " noapic<wait>",
+        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ubuntu/14.04/preseed-build.cfg<wait>",
+        " -- <wait>",
+        "<enter><wait>"
+      ],
+      "boot_wait": "10s",
+
+      "disk_size": 40960,
+      "vboxmanage": [
+        [ "modifyvm", "{{.Name}}", "--memory", "1024" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "1" ],
+        [ "modifyvm", "{{.Name}}", "--hwvirtex", "on" ]
+      ],      
+
+      "guest_os_type": "Ubuntu_64",
+      "guest_additions_path": "/tmp/VBoxGuestAdditions_{{ .Version }}.iso",
+
+      "http_directory": "http",
+
+      "iso_checksum": "{{ user `iso_checksum` }}",
+      "iso_checksum_type": "{{ user `iso_checksum_type` }}",
+      "iso_url": "{{ user `iso_url` }}",
+
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+
+      "shutdown_command": "echo 'vagrant' | sudo -S /sbin/halt -h -p",
+      "headless": "true"
+    }
+  ],
+  
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "../builds/{{ .Provider }}/{{ user `name` }}.box"
+    }
+  ],
+  
+  "provisioners": [
+    { 
+      "type": "shell",      
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "scripts": [
+        "scripts/ubuntu/sudoers.sh",
+        "scripts/ubuntu/networking.sh",
+        "scripts/common/sshd.sh",
+        "scripts/common/vagrant.sh",
+        "scripts/common/tools.sh",
+        "scripts/ubuntu/cleanup.sh"
+      ]
+    }
+  ]
+}
