@@ -1,6 +1,12 @@
 #!/bin/bash -eux
 
-version=${DB2_VERSION:-"10.5fp2"}
+default=""
+case "`rpm -qf /etc/redhat-release --qf '%{VERSION}' 2>/dev/null`" in
+	6*) default="10.5fp2";;
+	7*) default="10.5fp3";;
+esac
+
+version=${DB2_VERSION:-$default}
 install_dir=`echo "$version" | grep -Po '([0-9\.]+)' | head -1`
 
 curl -O "http://platdev.sfolab.ibm.com/devtools/db2/v${version}_linuxx64_server_r.tar.gz"

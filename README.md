@@ -29,7 +29,7 @@ The Vagrantfiles are designed to be as atomic as possible. Specifically, the spe
 Tested on `stitch` a Windows 7 environment:
 - packer-0.7.1
 - vagrant-1.6.3
-- VirtualBox-4.3.8
+- VirtualBox-4.3.16
 - [git-bash](http://git-scm.com/download/win)-1.8.4
 
 The following examples create a box with the 9.1.1117.0 IBM Endpoint Manager Root Server. 
