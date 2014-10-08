@@ -1,11 +1,14 @@
 #!/bin/bash -eux
 
-curl -O http://platdev.sfolab.ibm.com/devtools/db2/v10.5fp2_linuxx64_server_r.tar.gz
+version=${DB2_VERSION:-"10.5fp2"}
+install_dir=`echo "$version" | grep -Po '([0-9\.]+)' | head -1`
+
+curl -O "http://platdev.sfolab.ibm.com/devtools/db2/v${version}_linuxx64_server_r.tar.gz"
 
 cat > /home/vagrant/db2.rsp << NO_ONE_GETS_LEFT_BEHIND
 LIC_AGREEMENT=ACCEPT
 PROD=DB2_SERVER_EDITION
-FILE=/opt/ibm/db2/V10.5
+FILE=/opt/ibm/db2/V$install_dir
 INSTALL_TYPE=TYPICAL
 DAS_CONTACT_LIST=LOCAL
 DAS_USERNAME=dasusr1
@@ -31,9 +34,9 @@ inst1.FENCED_PASSWORD=bigfix
 LANG=EN
 NO_ONE_GETS_LEFT_BEHIND
 
-tar -xf v10.5fp2_linuxx64_server_r.tar.gz
-rm -f v10.5fp2_linuxx64_server_r.tar.gz
+tar -xf "v${version}_linuxx64_server_r.tar.gz"
+rm -f "v${version}_linuxx64_server_r.tar.gz"
 ./server_r/db2setup -r db2.rsp -l /var/log/db2setup.log
 rm -rf ./server_r
 rm -f db2.rsp
-/opt/ibm/db2/V10.5/bin/db2iauto -on db2inst1
+/opt/ibm/db2/V$install_dir/bin/db2iauto -on db2inst1

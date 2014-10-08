@@ -6,7 +6,8 @@
     "iso_checksum": "c6a2009d93a0cb59e7782afe82a771a6123eafcb",
     "iso_checksum_type": "sha1",
 
-    "bigfix_version": "{{ env `BIGFIX_VERSION` }}"
+    "bigfix_version": "{{ env `BIGFIX_VERSION` }}",
+    "db2_version": "{{ env `DB2_VERSION` }}"
   },
 
   "builders": [
@@ -54,7 +55,7 @@
     { 
       "type": "shell",      
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "environment_vars": ["BIGFIX_VERSION={{ user `bigfix_version` }}"],
+      "environment_vars": ["BIGFIX_VERSION={{ user `bigfix_version` }}", "DB2_VERSION={{ user `db2_version` }}"],
       "scripts": [
         "scripts/redhat/6/fix-slow-dns.sh",
         "../bigfix/redhat/6/yum.sh",

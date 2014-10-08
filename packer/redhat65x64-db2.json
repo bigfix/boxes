@@ -4,7 +4,9 @@
 
     "iso_url": "http://platdev.sfolab.ibm.com/iso/Linux/Red%20Hat/RHEL6.5/server/rhel-server-6.5-x86_64-dvd.iso",
     "iso_checksum": "c6a2009d93a0cb59e7782afe82a771a6123eafcb",
-    "iso_checksum_type": "sha1"
+    "iso_checksum_type": "sha1",
+
+    "db2_version": "{{ env `DB2_VERSION` }}"
   },
 
   "builders": [
@@ -52,6 +54,7 @@
     { 
       "type": "shell",      
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "environment_vars": ["DB2_VERSION={{ user `db2_version` }}"],
       "scripts": [
         "scripts/redhat/6/fix-slow-dns.sh",
         "../bigfix/redhat/6/yum.sh",

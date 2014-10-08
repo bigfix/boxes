@@ -4,7 +4,7 @@ A collection of packer templates to create vagrant boxes for building and instal
 
 # Usage
 ## Prerequisites
-- [packer-0.6.x](http://www.packer.io/downloads.html)
+- [packer-0.7.x](http://www.packer.io/downloads.html)
 - [vagrant-1.6.x](http://www.vagrantup.com/downloads.html)
 - [VirtualBox-4.3.x](https://www.virtualbox.org/wiki/Downloads)
 
@@ -27,7 +27,7 @@ The Vagrantfiles are designed to be as atomic as possible. Specifically, the spe
 
 ## Example
 Tested on `stitch` a Windows 7 environment:
-- packer-0.6.0
+- packer-0.7.1
 - vagrant-1.6.3
 - VirtualBox-4.3.8
 - [git-bash](http://git-scm.com/download/win)-1.8.4
