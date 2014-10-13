@@ -2,8 +2,7 @@
   "variables": {
     "name": "ubuntu1404x64-build",
 
-    "iso_url_hodor": "http://platdev.sfolab.ibm.com/iso/Linux/Ubuntu/Ubuntu%2014.04/.iso",
-    "iso_url": "http://releases.ubuntu.com/14.04/ubuntu-14.04.1-server-amd64.iso",
+    "iso_url": "http://platdev.sfolab.ibm.com/iso/Linux/Ubuntu/Ubuntu%2014.04/.iso",
     "iso_checksum": "401c5f6666fe2879ac3a9a3247b487723410cf88",
     "iso_checksum_type": "sha1"
   },
