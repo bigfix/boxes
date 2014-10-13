@@ -37,7 +37,10 @@ is_ok "http://builds.sfolab.ibm.com/$major_version/$version/" || exit 1
 curl -O "http://builds.sfolab.ibm.com/$major_version/$version/Unix/ServerInstaller_$version-rhe6.x86_64.tgz"
 tar -xzf ServerInstaller_$version-rhe6.x86_64.tgz
 rm -f ServerInstaller_$version-rhe6.x86_64.tgz
-yum install -y fontconfig.x86_64 libXext.x86_64 libXrender.x86_64 
+
+rpm -qa | grep -q fontconfig || yum install -y fontconfig.x86_64
+rpm -qa | grep -q libXext || yum install -y libXext.x86_64
+rpm -qa | grep -q libXext || yum install -y libXrender.x86_64
 
 curl http://platdev.sfolab.ibm.com/devtools/webui/license.pvk -o /home/vagrant/license.pvk
 curl http://platdev.sfolab.ibm.com/devtools/webui/license.crt -o /home/vagrant/license.crt
