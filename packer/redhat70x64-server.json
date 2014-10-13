@@ -1,0 +1,69 @@
+{
+  "variables": {
+    "name": "redhat70x64-server",
+
+    "iso_url": "http://platdev.sfolab.ibm.com/iso/Linux/Red%20Hat/RHEL70/RHEL-7.0-20140507.0-Server-x86_64-dvd1.iso",
+    "iso_checksum": "ce5b360b8ef96fa2105a13cf981f2e3d148931d6",
+    "iso_checksum_type": "sha1",
+
+    "bigfix_version": "{{ env `BIGFIX_VERSION` }}",
+    "db2_version": "{{ env `DB2_VERSION` }}"
+  },
+
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "vm_name": "{{ user `name` }}",
+      "output_directory": "output-{{ user `name` }}",
+
+      "boot_command": [
+        "<tab> noapic text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/redhat/7.0/ks-server.cfg<enter><wait>"
+      ],
+      "boot_wait": "10s",
+
+      "disk_size": 40960,
+      "vboxmanage": [
+        [ "modifyvm", "{{.Name}}", "--memory", "2048" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "1" ]
+      ],      
+
+      "guest_os_type": "RedHat_64",
+      "guest_additions_path": "/tmp/VBoxGuestAdditions_{{ .Version }}.iso",
+
+      "http_directory": "http",
+
+      "iso_checksum": "{{ user `iso_checksum` }}",
+      "iso_checksum_type": "{{ user `iso_checksum_type` }}",
+      "iso_url": "{{ user `iso_url` }}",
+
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+
+      "shutdown_command": "echo 'vagrant' | sudo -S /sbin/halt -h -p",
+      "headless": "true"
+    }
+  ],
+  
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "../builds/{{ .Provider }}/{{ user `name` }}.box"
+    }
+  ],
+  
+  "provisioners": [
+    { 
+      "type": "shell",      
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "environment_vars": ["BIGFIX_VERSION={{ user `bigfix_version` }}", "DB2_VERSION={{ user `db2_version` }}"],
+      "scripts": [
+        "../bigfix/redhat/db2.sh",
+        "../bigfix/redhat/server.sh",
+        "scripts/common/sshd.sh",
+        "scripts/common/vagrant.sh",
+        "scripts/common/tools.sh",
+        "scripts/redhat/cleanup.sh"
+      ]
+    }
+  ]
+}
