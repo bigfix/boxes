@@ -8,7 +8,7 @@ BIGFIX_VERSION=[ENV["BIGFIX_VERSION"] || "9.2.0.363"]
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "bigfix/redhat70x64-db2"
-  config.vm.hostname = "bigfix-server.test"
+  config.vm.hostname = "bigfix.test"
 
   config.vm.provider "virtualbox" do |v, override|
     v.gui = false
