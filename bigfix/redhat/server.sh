@@ -42,8 +42,8 @@ rpm -qa | grep -q fontconfig || yum install -y fontconfig.x86_64
 rpm -qa | grep -q libXext || yum install -y libXext.x86_64
 rpm -qa | grep -q libXext || yum install -y libXrender.x86_64
 
-curl http://platdev.sfolab.ibm.com/devtools/webui/license.pvk -o /home/vagrant/license.pvk
-curl http://platdev.sfolab.ibm.com/devtools/webui/license.crt -o /home/vagrant/license.crt
+curl http://builds.sfolab.ibm.com/devtools/webui/license.pvk -o /home/vagrant/license.pvk
+curl http://builds.sfolab.ibm.com/devtools/webui/license.crt -o /home/vagrant/license.crt
 
 cat > /home/vagrant/iem.rsp << OHANA_MEANS_FAMILY
 BES_PREREQ_INSTALL="install"

@@ -9,7 +9,7 @@ esac
 version=${DB2_VERSION:-$default}
 install_dir=`echo "$version" | grep -Po '([0-9\.]+)' | head -1`
 
-curl -O "http://platdev.sfolab.ibm.com/devtools/db2/v${version}_linuxx64_server_r.tar.gz"
+curl -O "http://builds.sfolab.ibm.com/devtools/db2/v${version}_linuxx64_server_r.tar.gz"
 
 cat > /home/vagrant/db2.rsp << NO_ONE_GETS_LEFT_BEHIND
 LIC_AGREEMENT=ACCEPT

@@ -2,7 +2,7 @@
   "variables": {
     "name": "redhat65x64-server",
 
-    "iso_url": "http://platdev.sfolab.ibm.com/iso/Linux/Red%20Hat/RHEL6.5/server/rhel-server-6.5-x86_64-dvd.iso",
+    "iso_url": "http://builds.sfolab.ibm.com/iso/Linux/Red%20Hat/RHEL6.5/server/rhel-server-6.5-x86_64-dvd.iso",
     "iso_checksum": "c6a2009d93a0cb59e7782afe82a771a6123eafcb",
     "iso_checksum_type": "sha1",
 

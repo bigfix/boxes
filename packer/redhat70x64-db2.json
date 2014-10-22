@@ -2,7 +2,7 @@
   "variables": {
     "name": "redhat70x64-db2",
 
-    "iso_url": "http://platdev.sfolab.ibm.com/iso/Linux/Red%20Hat/RHEL70/RHEL-7.0-20140507.0-Server-x86_64-dvd1.iso",
+    "iso_url": "http://builds.sfolab.ibm.com/iso/Linux/Red%20Hat/RHEL70/RHEL-7.0-20140507.0-Server-x86_64-dvd1.iso",
     "iso_checksum": "ce5b360b8ef96fa2105a13cf981f2e3d148931d6",
     "iso_checksum_type": "sha1",
 
