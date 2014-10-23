@@ -46,3 +46,30 @@ rm -f "v${version}_linuxx64_server_r.tar.gz"
 rm -rf ./server_r
 rm -f db2.rsp
 /opt/ibm/db2/V$install_dir/bin/db2iauto -on db2inst1
+
+cat > /etc/rc.d/init.d/db2 << NO_ONE_GETS_FORGOTTEN
+#!/bin/sh
+# chkconfig: 2345 99 99
+
+export SYSTEMCTL_SKIP_REDIRECT=1
+
+PROG="DB2"
+DBINST="db2inst1"
+
+start() {
+	/bin/echo -n $"Starting $PROG: "
+	su - $DBINST -c "db2start"
+	/bin/echo " done."
+	exit 0
+}
+
+case "$1" in
+	start) start ;;
+	*)
+		/bin/echo "Usage: service db2 {start}"
+		exit 1
+		;;
+esac
+NO_ONE_GETS_FORGOTTEN
+chmod 755 /etc/rc.d/init.d/db2
+chkconfig --add db2
