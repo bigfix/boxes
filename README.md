@@ -49,7 +49,7 @@ $ cd boxes/packer
 $ packer build redhat70x64-db2.json
 $ cd -
 $ vagrant box add builds/virtualbox/redhat70x64-db2.box --name bigfix/redhat70x64-db2
-$ cd vagrant/server/redhat
+$ cd vagrant/server/redhat/ready
 $ BIGFIX_VERSION="9.2.0.363" vagrant up
 ```
 
@@ -66,7 +66,7 @@ $ cd boxes/packer
 $ BIGFIX_VERSION="9.2.0.363" packer build redhat70x64-server.json
 $ cd -
 $ vagrant box add builds/virtualbox/redhat70x64-server.box --name bigfix/redhat70x64-server92
-$ cd vagrant/server/redhat/latest
+$ cd vagrant/server/redhat/9.2
 $ vagrant up
 ```
 
@@ -80,7 +80,7 @@ This example installs the 9.2.0.363 IBM Endpoint Manager Root Server on start up
 
 ```bash
 $ git clone git@github.com:bigfix/boxes.git
-$ cd vagrant/server/redhat
+$ cd vagrant/server/redhat/ready
 $ BIGFIX_VERSION="9.2.0.363" vagrant up
 ```
 
@@ -88,7 +88,7 @@ This example starts a box with the 9.2.0.363 IBM Endpoint Manager Root Server al
 
 ```bash
 $ git clone git@github.com:bigfix/boxes.git
-$ cd vagrant/server/redhat/latest
+$ cd vagrant/server/redhat/9.2
 $ vagrant up
 ```
 
