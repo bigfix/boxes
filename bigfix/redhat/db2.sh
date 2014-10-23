@@ -57,13 +57,13 @@ PROG="DB2"
 DBINST="db2inst1"
 
 start() {
-	/bin/echo -n $"Starting $PROG: "
-	su - $DBINST -c "db2start"
+	/bin/echo -n $"Starting \$PROG: "
+	su - \$DBINST -c "db2start"
 	/bin/echo " done."
 	exit 0
 }
 
-case "$1" in
+case "\$1" in
 	start) start ;;
 	*)
 		/bin/echo "Usage: service db2 {start}"
