@@ -49,6 +49,7 @@ cat > /home/vagrant/iem.rsp << OHANA_MEANS_FAMILY
 BES_PREREQ_INSTALL="install"
 LA_ACCEPT="true"
 IS_EVALUATION="false"
+USE_PROXY="false"
 COMPONENT_SRV="true"
 COMPONENT_WR="true"
 SINGLE_DATABASE="true"
