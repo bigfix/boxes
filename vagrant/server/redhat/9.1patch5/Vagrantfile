@@ -4,7 +4,7 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "bigfix/redhat65x64-server91patch3"
+  config.vm.box = "bigfix/redhat65x64-server91patch5"
   config.vm.hostname = "bigfix.test"
 
   config.vm.provider "virtualbox" do |v, override|
