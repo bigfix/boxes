@@ -5,7 +5,7 @@ A collection of packer templates to create vagrant boxes for building and instal
 # Usage
 ## Prerequisites
 - [packer-0.7.x](http://www.packer.io/downloads.html)
-- [vagrant-1.6.x](http://www.vagrantup.com/downloads.html)
+- [vagrant-1.7.x](http://www.vagrantup.com/downloads.html)
 - [VirtualBox-4.3.x](https://www.virtualbox.org/wiki/Downloads)
 
 ### Configuration
@@ -29,12 +29,12 @@ The Vagrantfiles are designed to be as atomic as possible. Specifically, the spe
 This section documents how [bigfix/boxes](https://github.com/bigfix/boxes) can be simulated in an external environment.
 
 Tested on `stitch` a Windows 7 environment:
-- packer-0.7.1
-- vagrant-1.6.3
+- packer-0.7.5
+- vagrant-1.7.1
 - VirtualBox-4.3.16
-- [git-bash](http://git-scm.com/download/win)-1.8.4
+- [git-bash](http://git-scm.com/download/win)-1.9.5
 
-The following examples create a box with the 9.2.0.363 IBM Endpoint Manager Root Server. 
+The following examples create a box with the 9.2.1.48 IBM Endpoint Manager Root Server. 
 
 ### -db2
 This example uses the [`packer/redhat65x64-db2.json`](packer/redhat65x64-db2.json) template.
@@ -49,8 +49,8 @@ $ cd boxes/packer
 $ packer build redhat70x64-db2.json
 $ cd -
 $ vagrant box add builds/virtualbox/redhat70x64-db2.box --name bigfix/redhat70x64-db2
-$ cd vagrant/server/redhat/ready
-$ BIGFIX_VERSION="9.2.0.363" vagrant up
+$ cd vagrant/ready/redhat
+$ BIGFIX_VERSION="9.2.1.48" vagrant up
 ```
 
 ### -server
@@ -63,7 +63,7 @@ On `stitch`:
 ```bash
 $ git clone git@github.com:bigfix/boxes.git
 $ cd boxes/packer
-$ BIGFIX_VERSION="9.2.0.363" packer build redhat70x64-server.json
+$ BIGFIX_VERSION="9.2.1.48" packer build redhat70x64-server.json
 $ cd -
 $ vagrant box add builds/virtualbox/redhat70x64-server.box --name bigfix/redhat70x64-server92
 $ cd vagrant/server/redhat/9.2
@@ -74,17 +74,17 @@ $ vagrant up
 This section documents how this repository can be used within the [bigfix](http://platdev.sfolab.ibm.com/) organization.
 
 ### Example
-The following examples start a box with the 9.2.0.363 IBM Endpoint Manager Root Server on a Red Hat Enterprise Linux 7.0 x86_64 and DB2 10.5 FP3 system.
+The following examples start a box with the 9.2.1.48 IBM Endpoint Manager Root Server on a Red Hat Enterprise Linux 7.0 x86_64 and DB2 10.5 FP3 system.
 
-This example installs the 9.2.0.363 IBM Endpoint Manager Root Server on start up.
+This example installs the 9.2.1.48 IBM Endpoint Manager Root Server on start up.
 
 ```bash
 $ git clone git@github.com:bigfix/boxes.git
-$ cd vagrant/server/redhat/ready
-$ BIGFIX_VERSION="9.2.0.363" vagrant up
+$ cd vagrant/server/redhat
+$ BIGFIX_VERSION="9.2.1.48" vagrant up
 ```
 
-This example starts a box with the 9.2.0.363 IBM Endpoint Manager Root Server already installed:
+This example starts a box with the 9.2.1.48 IBM Endpoint Manager Root Server already installed:
 
 ```bash
 $ git clone git@github.com:bigfix/boxes.git
