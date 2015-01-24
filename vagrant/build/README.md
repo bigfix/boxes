@@ -12,7 +12,8 @@ The following example builds a Ubuntu x86_64 agent and runs unit tests.
 
 ```bash
 git clone git@github.com:bigfix/boxes.git
-cd vagrant/build/ubuntu
+ln -s vagrant/build/ubuntu/Vagrantfile /depot/Main/Vagrantfile
+cd /depot/Main/Vagrantfile
 vagrant up
 vagrant ssh --command "cd /vagrant/BES/ProjectFiles/Unix && make package && make unittests"
 ```
