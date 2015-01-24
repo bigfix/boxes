@@ -1,0 +1,24 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "bigfix/redhat65x64-build"
+  config.vm.hostname = "bigfix-build.test"
+
+  config.vm.provider "virtualbox" do |v, override|
+    v.gui = false
+    v.customize ["modifyvm", :id, "--memory", 4096]
+    v.customize ["modifyvm", :id, "--cpus", 4]
+  end
+
+  config.vm.synced_folder ".", "/vagrant", type: "rsync", rsync__exclude: "Output"
+
+  $script = <<SCRIPT
+echo "export BESTARGET=\"x86_64_rhe6_fips\"" >> /home/vagrant/.bashrc
+echo "export BESPARALLEL=\"-j4\"" >> /home/vagrant/.bashrc
+SCRIPT
+
+  config.vm.provision "shell", inline: $script
+end

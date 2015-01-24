@@ -1,0 +1,69 @@
+{
+  "variables": {
+    "name": "redhat65x64-build",
+
+    "iso_url": "http://builds.sfolab.ibm.com/iso/Linux/Red%20Hat/RHEL6.5/server/rhel-server-6.5-x86_64-dvd.iso",
+    "iso_checksum": "c6a2009d93a0cb59e7782afe82a771a6123eafcb",
+    "iso_checksum_type": "sha1",
+
+    "db2_version": "{{ env `DB2_VERSION` }}"
+  },
+
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "vm_name": "{{ user `name` }}",
+      "output_directory": "output-{{ user `name` }}",
+
+      "boot_command": [
+        "<tab> noapic text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/redhat/6.5/ks-build.cfg<enter><wait>"
+      ],
+      "boot_wait": "10s",
+
+      "disk_size": 40960,
+      "vboxmanage": [
+        [ "modifyvm", "{{.Name}}", "--memory", "2048" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "1" ]
+      ],      
+
+      "guest_os_type": "RedHat_64",
+      "guest_additions_path": "/tmp/VBoxGuestAdditions_{{ .Version }}.iso",
+
+      "http_directory": "http",
+
+      "iso_checksum": "{{ user `iso_checksum` }}",
+      "iso_checksum_type": "{{ user `iso_checksum_type` }}",
+      "iso_url": "{{ user `iso_url` }}",
+
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+
+      "shutdown_command": "echo 'vagrant' | sudo -S /sbin/halt -h -p",
+      "headless": "true"
+    }
+  ],
+  
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "../builds/{{ .Provider }}/{{ user `name` }}.box"
+    }
+  ],
+  
+  "provisioners": [
+    { 
+      "type": "shell",      
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "environment_vars": ["DB2_VERSION={{ user `db2_version` }}"],
+      "scripts": [
+        "scripts/redhat/6/fix-slow-dns.sh",
+        "../bigfix/redhat/6/yum.sh",
+        "../bigfix/redhat/db2.sh",
+        "scripts/common/sshd.sh",
+        "scripts/common/vagrant.sh",
+        "scripts/common/tools.sh",
+        "scripts/redhat/cleanup.sh"
+      ]
+    }
+  ]
+}
