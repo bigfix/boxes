@@ -7,7 +7,13 @@
  - `LineEnd: share`
 
 ## Compile
-### Example
+All build machines are configured with vagrant's [multi-machine functionality](https://docs.vagrantup.com/v2/multi-machine/index.html). The available machine configurations are:
+
+- dev (default)
+- swarm
+
+### dev
+#### Example
 The following example builds an IBM Endpoint Manager Ubuntu x86_64 Agent and runs unit tests.
 
 ```bash

@@ -3,6 +3,8 @@
 
 VAGRANTFILE_API_VERSION = "2"
 
+BIGFIX_P4 = "https://raw.githubusercontent.com/bigfix/boxes/master/bigfix/common/p4.sh"
+
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu/precise64"
   config.vm.hostname = "bigfix-build.test"
@@ -13,7 +15,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.customize ["modifyvm", :id, "--cpus", 4]
   end
 
-  config.vm.synced_folder ".", "/vagrant", type: "rsync", rsync__exclude: "Output"
+  config.vm.define "dev", primary: true do |dev|
+    dev.vm.synced_folder ".", "/vagrant", type: "rsync", rsync__exclude: "Output"
+  end
+
+  config.vm.define "swarm", autostart: false do |swarm|
+    swarm.vm.provision "shell", path: BIGFIX_P4
+  end
 
   $script = <<SCRIPT
 sudo apt-get update && sudo apt-get install --yes libxt-dev libxaw7-dev

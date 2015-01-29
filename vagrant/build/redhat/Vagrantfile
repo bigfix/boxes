@@ -13,7 +13,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.customize ["modifyvm", :id, "--cpus", 4]
   end
 
-  config.vm.synced_folder ".", "/vagrant", type: "rsync", rsync__exclude: "Output"
+  config.vm.define "dev", primary: true do |dev|
+    dev.vm.synced_folder ".", "/vagrant", type: "rsync", rsync__exclude: "Output"
+  end
+
+  config.vm.define "swarm", autostart: false do |swarm|
+  end
 
   $script = <<SCRIPT
 echo "export BESTARGET=\"x86_64_rhe6_fips\"" >> /home/vagrant/.bashrc
