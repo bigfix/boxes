@@ -21,7 +21,7 @@ git clone git@github.com:bigfix/boxes.git
 ln -s boxes/vagrant/build/ubuntu/Vagrantfile /depot/Main/Vagrantfile
 cd /depot/Main/Vagrantfile
 vagrant up
-vagrant ssh --command "cd /vagrant/BES/ProjectFiles/Unix && make package && make unittests"
+vagrant ssh --command "cd /depot/BES/ProjectFiles/Unix && make package && make unittests"
 ```
 
 The following example builds an IBM Endpoint Manager Red Hat x86_64 Root Server and runs unit tests.
@@ -31,5 +31,5 @@ git clone git@github.com:bigfix/boxes.git
 ln -s boxes/vagrant/build/redhat/Vagrantfile /depot/Main/Vagrantfile
 cd /depot/Main/Vagrantfile
 vagrant up
-vagrant ssh --command "cd /vagrant/BES/ProjectFiles/Unix && make package_server && make unittests"
+vagrant ssh --command "cd /depot/BES/ProjectFiles/Unix && make package_server && make unittests"
 ```
