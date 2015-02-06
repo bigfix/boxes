@@ -60,7 +60,7 @@
       "vmx_data": {
         "memsize": "4096",
         "numvcpus": "4",
-        "ethernet0.networkName": "sfolab"
+        "ethernet0.networkName": "VM Network"
       },
       "remote_type": "esx5",
       "remote_host": "{{ user `remote_host` }}",
