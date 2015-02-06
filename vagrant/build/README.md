@@ -33,3 +33,6 @@ cd /depot/Main/Vagrantfile
 vagrant up
 vagrant ssh --command "cd /depot/BES/ProjectFiles/Unix && make package_server && make unittests"
 ```
+
+# Support
+Any issues or questions regarding this software should be filed via [GitHub issues](https://github.com/bigfix/boxes/issues).
