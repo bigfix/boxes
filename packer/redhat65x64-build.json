@@ -18,7 +18,7 @@
     {
       "type": "virtualbox-iso",
       "vm_name": "{{ user `name` }}",
-      "output_directory": "output-{{ .Provider }}-{{ user `name` }}",
+      "output_directory": "output-{{ user `name` }}-{{ timestamp }}",
 
       "boot_command": [
         "<tab> noapic text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/redhat/6.5/ks-build.cfg<enter><wait>"
@@ -49,7 +49,7 @@
     {
       "type": "vmware-iso",
       "vm_name": "{{ user `name` }}",
-      "output_directory": "output-{{ .Provider }}-{{ user `name` }}",
+      "output_directory": "output-{{ user `name` }}-{{ timestamp }}",
 
       "boot_command": [
         "<tab> noapic text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/redhat/6.5/ks-build.cfg<enter><wait>"

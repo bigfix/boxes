@@ -12,8 +12,11 @@ class TestValidate(unittest.TestCase):
 
   def __run(self, args):
     try:
+      env = os.environ.copy()
+      env['REMOTE_HOST'] = 'hodor'
       subprocess.check_call(args, cwd=self.template_path, 
-                            stdout=subprocess.DEVNULL)
+                            stdout=subprocess.DEVNULL,
+                            env=env)
     except subprocess.CalledProcessError as e:
       self.fail('Failed with return code ({0})'.format(e.returncode))
 
