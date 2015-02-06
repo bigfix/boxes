@@ -19,6 +19,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.define "swarm", autostart: false do |swarm|
+    swarm.ssh.insert_key = false
   end
 
   $script = <<SCRIPT
