@@ -6,14 +6,19 @@
     "iso_checksum": "c6a2009d93a0cb59e7782afe82a771a6123eafcb",
     "iso_checksum_type": "sha1",
 
-    "db2_version": "{{ env `DB2_VERSION` }}"
+    "db2_version": "{{ env `DB2_VERSION` }}",
+
+    "remote_host": "{{ env `REMOTE_HOST` }}",
+    "remote_datastore": "{{ env `REMOTE_DATASTORE` }}",
+    "remote_username": "{{ env `REMOTE_USERNAME` }}",
+    "remote_password": "{{ env `REMOTE_PASSWORD` }}"
   },
 
   "builders": [
     {
       "type": "virtualbox-iso",
       "vm_name": "{{ user `name` }}",
-      "output_directory": "output-{{ user `name` }}",
+      "output_directory": "output-{{ .Provider }}-{{ user `name` }}",
 
       "boot_command": [
         "<tab> noapic text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/redhat/6.5/ks-build.cfg<enter><wait>"
@@ -28,6 +33,44 @@
 
       "guest_os_type": "RedHat_64",
       "guest_additions_path": "/tmp/VBoxGuestAdditions_{{ .Version }}.iso",
+
+      "http_directory": "http",
+
+      "iso_checksum": "{{ user `iso_checksum` }}",
+      "iso_checksum_type": "{{ user `iso_checksum_type` }}",
+      "iso_url": "{{ user `iso_url` }}",
+
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+
+      "shutdown_command": "echo 'vagrant' | sudo -S /sbin/halt -h -p",
+      "headless": "true"
+    },
+    {
+      "type": "vmware-iso",
+      "vm_name": "{{ user `name` }}",
+      "output_directory": "output-{{ .Provider }}-{{ user `name` }}",
+
+      "boot_command": [
+        "<tab> noapic text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/redhat/6.5/ks-build.cfg<enter><wait>"
+      ],
+      "boot_wait": "10s",
+
+      "disk_size": 40960,
+      "vmx_data": {
+        "memsize": "4096",
+        "numvcpus": "4",
+        "ethernet0.networkName": "sfolab"
+      },
+      "remote_type": "esx5",
+      "remote_host": "{{ user `remote_host` }}",
+      "remote_datastore": "{{ user `remote_datastore` }}",
+      "remote_username": "{{ user `remote_username` }}",
+      "remote_password": "{{ user `remote_password` }}",
+
+      "guest_os_type": "rhel6-64",
+      "tools_upload_flavor": "linux",
+      "tools_upload_path": "/tmp/{{ .Flavor }}.iso",
 
       "http_directory": "http",
 
