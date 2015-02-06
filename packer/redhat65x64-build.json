@@ -70,7 +70,6 @@
 
       "guest_os_type": "rhel6-64",
       "tools_upload_flavor": "linux",
-      "tools_upload_path": "/tmp/{{ .Flavor }}.iso",
 
       "http_directory": "http",
 
@@ -89,6 +88,7 @@
   "post-processors": [
     {
       "type": "vagrant",
+      "only": ["virtualbox-iso"],
       "output": "../builds/{{ .Provider }}/{{ user `name` }}.box"
     }
   ],

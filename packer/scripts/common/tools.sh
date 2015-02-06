@@ -13,9 +13,15 @@ if [[ $PACKER_BUILDER_TYPE =~ vmware ]]; then
 		yum erase -y fuse
 	fi
 
+
+	if [[ -f /tmp/linux.iso ]]; then
+		tools=/tmp/linux.iso
+	else
+		tools=/dev/cdrom
+	fi
 	cd /tmp
 	mkdir -p /mnt/cdrom
-	mount -o loop /tmp/linux.iso /mnt/cdrom
+	mount -o loop $tools /mnt/cdrom
 	tar zxf /mnt/cdrom/VMwareTools-*.tar.gz -C /tmp/
 	/tmp/vmware-tools-distrib/vmware-install.pl --default
 	rm -f /tmp/linux.iso
