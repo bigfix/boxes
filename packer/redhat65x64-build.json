@@ -101,6 +101,7 @@
       "scripts": [
         "scripts/redhat/6/fix-slow-dns.sh",
         "../bigfix/redhat/6/yum.sh",
+        "../bigfix/redhat/6/openjdk.sh",
         "../bigfix/redhat/db2.sh",
         "../bigfix/common/p4.sh",
         "scripts/common/sshd.sh",
