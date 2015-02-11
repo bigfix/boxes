@@ -114,10 +114,6 @@ On `stitch`:
 $ git clone git@github.com:bigfix/boxes.git
 $ cd boxes/packer
 $ REMOTE_HOST={host} REMOTE_DATASTORE={datastore} REMOTE_USERNAME={username} REMOTE_PASSWORD={password} packer build --only=vmware-iso redhat65x64-build.json
-$ cd -
-$ vagrant box add builds/virtualbox/redhat70x64-server.box --name bigfix/redhat70x64-server92
-$ cd vagrant/server/redhat/9.2
-$ vagrant up
 ```
 
 # Support
