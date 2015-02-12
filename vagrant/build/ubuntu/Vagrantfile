@@ -16,8 +16,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.define "dev", primary: true do |dev|
-    dev.vm.synced_folder ".", "/depot", type: "rsync", rsync__exclude: "Output"
-    dev.vm.synced_folder "Output/", "/vagrant"
+    dev.vm.synced_folder ".", "/depot", type: "rsync", rsync__exclude: ["Output", "Output64"]
+    dev.vm.synced_folder "Output/", "/output"
+    dev.vm.synced_folder "Output64/", "/output64"
   end
 
   config.vm.define "swarm", autostart: false do |swarm|
