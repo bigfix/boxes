@@ -48,7 +48,7 @@ rm -f ServerInstaller_*-rhe6.x86_64.tgz
 
 rpm -qa | grep -q fontconfig || yum install -y fontconfig.x86_64
 rpm -qa | grep -q libXext || yum install -y libXext.x86_64
-rpm -qa | grep -q libXext || yum install -y libXrender.x86_64
+rpm -qa | grep -q libXrender || yum install -y libXrender.x86_64
 
 curl http://builds.sfolab.ibm.com/devtools/webui/license.pvk -o /home/vagrant/license.pvk
 curl http://builds.sfolab.ibm.com/devtools/webui/license.crt -o /home/vagrant/license.crt
