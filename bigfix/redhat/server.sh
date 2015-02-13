@@ -29,10 +29,10 @@ function fix_wr {
 	return 0
 }
 
-rm -f ServerInstaller_*.tgz
+rm -f ServerInstaller_*-rhe6.x86_64.tgz
 
-custom=$(find /vagrant -maxdepth 1 -type f -name 'ServerInstaller_*.tgz' -print -quit)
-if [[ test -n $custom ]]; then
+custom=$(find /vagrant -maxdepth 1 -type f -name 'ServerInstaller_*-rhe6.x86_64.tgz' -print -quit)
+if test -n $custom; then
 	cp $custom .
 else
 	version=${1:-$BIGFIX_VERSION}
