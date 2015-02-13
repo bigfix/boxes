@@ -29,14 +29,22 @@ function fix_wr {
 	return 0
 }
 
-version=${1:-$BIGFIX_VERSION}
-major_version=`echo "$version" | sed -r -n 's/([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-9]+)/\1\.\2/p'`
+rm -f ServerInstaller_*.tgz
 
-is_ok "http://builds.sfolab.ibm.com/$major_version/$version/" || exit 1
+custom=$(find /vagrant -maxdepth 1 -type f -name 'ServerInstaller_*.tgz' -print -quit)
+if [[ test -n $custom ]]; then
+	cp $custom .
+else
+	version=${1:-$BIGFIX_VERSION}
+	major_version=`echo "$version" | sed -r -n 's/([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-9]+)/\1\.\2/p'`
 
-curl -O "http://builds.sfolab.ibm.com/$major_version/$version/Unix/ServerInstaller_$version-rhe6.x86_64.tgz"
-tar -xzf ServerInstaller_$version-rhe6.x86_64.tgz
-rm -f ServerInstaller_$version-rhe6.x86_64.tgz
+	is_ok "http://builds.sfolab.ibm.com/$major_version/$version/" || exit 1
+
+	curl -O "http://builds.sfolab.ibm.com/$major_version/$version/Unix/ServerInstaller_$version-rhe6.x86_64.tgz"
+fi
+
+tar -xzf ServerInstaller_*-rhe6.x86_64.tgz
+rm -f ServerInstaller_*-rhe6.x86_64.tgz
 
 rpm -qa | grep -q fontconfig || yum install -y fontconfig.x86_64
 rpm -qa | grep -q libXext || yum install -y libXext.x86_64
@@ -72,9 +80,9 @@ BES_LIC_FOLDER="./license"
 DB2_PORT="50000"
 OHANA_MEANS_FAMILY
 
-sh ServerInstaller_$version-rhe6.x86_64/install.sh -f /home/vagrant/iem.rsp || true
+sh ServerInstaller_*-rhe6.x86_64/install.sh -f /home/vagrant/iem.rsp || true
 
 is_ok "https://localhost:52311/api/help" true || exit 1
 is_ok "http://localhost/webreports" || fix_wr || exit 1
 
-rm -rf ServerInstaller_$version-rhe6.x86_64
+rm -rf ServerInstaller_*-rhe6.x86_64
