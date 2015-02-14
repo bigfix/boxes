@@ -1,7 +1,14 @@
+define make-target
+$(1): $(shell grep -oE "([^\"]+\.)sh" $(1))
+	@packer build -only=virtualbox-iso -force $(1)
+endef
+
 TEMPLATES := $(wildcard *.json)
 
-CHECK_VBOX = $(shell packer inspect -machine-readable $(t) | \
-	     awk -F ',' '{ if ($$3 == "template-builder" && $$4 == "virtualbox-iso") print "$(t)" }')
+check-provider = $(shell packer inspect -machine-readable $(t) | \
+		 awk -F ',' '{ if ($$3 == "template-builder" && $$4 == $(1)) print "$(t)" }')
+VBOXTEMPLATES = $(foreach t, $(TEMPLATES), $(call check-provider,"virtualbox-iso"))
+$(foreach t, $(VBOXTEMPLATES), $(eval $(call make-target,$(t))))
 
-virtualbox-iso: $(foreach t, $(TEMPLATES), $(CHECK_VBOX))
-	@$(foreach t, $^, packer build -only=$@ -force $(t);)
+.PHONY: all
+all: $(VBOXTEMPLATES)
