@@ -11,7 +11,11 @@
     "remote_host": "{{ env `REMOTE_HOST` }}",
     "remote_datastore": "{{ env `REMOTE_DATASTORE` }}",
     "remote_username": "{{ env `REMOTE_USERNAME` }}",
-    "remote_password": "{{ env `REMOTE_PASSWORD` }}"
+    "remote_password": "{{ env `REMOTE_PASSWORD` }}",
+
+    "atlas_access_token": "{{ env `ATLAS_ACCESS_TOKEN` }}",
+    "box_version": "{{ env `BOX_VERSION` }}",
+    "box_url": "{{ env `BOX_URL` }}"
   },
 
   "builders": [
@@ -90,6 +94,15 @@
       "type": "vagrant",
       "only": ["virtualbox-iso"],
       "output": "../builds/{{ .Provider }}/{{ user `name` }}.box"
+    },
+    {
+      "type": "vagrant-cloud",
+      "only": ["virtualbox-iso"],
+      "access_token": "{{ user `atlas_access_token` }}",
+      "box_tag": "bigfix/{{ user `name` }}",
+      "version": "{{ user `box_version` }}",
+      "no_release": "true",
+      "box_download_url": "{{ user `box_url` }}"
     }
   ],
   

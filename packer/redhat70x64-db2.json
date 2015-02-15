@@ -6,7 +6,11 @@
     "iso_checksum": "ce5b360b8ef96fa2105a13cf981f2e3d148931d6",
     "iso_checksum_type": "sha1",
 
-    "db2_version": "{{ env `DB2_VERSION` }}"
+    "db2_version": "{{ env `DB2_VERSION` }}",
+
+    "atlas_access_token": "{{ env `ATLAS_ACCESS_TOKEN` }}",
+    "box_version": "{{ env `BOX_VERSION` }}",
+    "box_url": "{{ env `BOX_URL` }}"
   },
 
   "builders": [
@@ -47,6 +51,15 @@
     {
       "type": "vagrant",
       "output": "../builds/{{ .Provider }}/{{ user `name` }}.box"
+    },
+    {
+      "type": "vagrant-cloud",
+      "only": ["virtualbox-iso"],
+      "access_token": "{{ user `atlas_access_token` }}",
+      "box_tag": "bigfix/{{ user `name` }}",
+      "version": "{{ user `box_version` }}",
+      "no_release": "true",
+      "box_download_url": "{{ user `box_url` }}"
     }
   ],
   
