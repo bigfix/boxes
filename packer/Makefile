@@ -1,5 +1,5 @@
 define make-target
-$(1): $(shell grep -oE "([^\"]+\.)sh" $(1))
+$(1): $(shell grep -oE '[^"]+\.sh' $(1))
 	@packer build -only=virtualbox-iso -force $(1)
 endef
 
