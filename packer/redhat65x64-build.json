@@ -107,21 +107,35 @@
   ],
   
   "provisioners": [
-    { 
-      "type": "shell",      
+    {
+      "type": "shell",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "environment_vars": ["DB2_VERSION={{ user `db2_version` }}"],
       "scripts": [
         "scripts/redhat/6/fix-slow-dns.sh",
         "../bigfix/redhat/6/yum.sh",
-        "../bigfix/redhat/6/openjdk.sh",
-        "../bigfix/redhat/6/iptables.sh",
-        "../bigfix/redhat/6/hostname.sh",
         "../bigfix/redhat/db2.sh",
-        "../bigfix/common/p4.sh",
         "scripts/common/sshd.sh",
         "scripts/common/vagrant.sh",
         "scripts/common/tools.sh",
+      ]
+    },
+    {
+      "only": "vmware-iso",
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "environment_vars": ["BOXNAME={{ user `name` }}"],
+      "scripts": [
+        "../bigfix/redhat/6/hostname.sh",
+        "../bigfix/redhat/6/iptables.sh",
+        "../bigfix/redhat/6/openjdk.sh",
+        "../bigfix/common/p4.sh"
+      ]
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "scripts": [
         "scripts/redhat/cleanup.sh"
       ]
     }
