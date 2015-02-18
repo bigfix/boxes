@@ -121,7 +121,7 @@
       ]
     },
     {
-      "only": "vmware-iso",
+      "only": ["vmware-iso"],
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "environment_vars": ["BOXNAME={{ user `name` }}"],
