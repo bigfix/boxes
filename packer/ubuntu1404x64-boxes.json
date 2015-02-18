@@ -1,15 +1,20 @@
 {
   "variables": {
-    "name": "ubuntu1404x64-build",
+    "name": "ubuntu1404x64-boxes",
 
     "iso_url": "http://builds.sfolab.ibm.com/iso/Linux/Ubuntu/Ubuntu%2014.04/ubuntu-14.04.1-server-amd64.iso",
     "iso_checksum": "401c5f6666fe2879ac3a9a3247b487723410cf88",
-    "iso_checksum_type": "sha1"
+    "iso_checksum_type": "sha1",
+
+    "remote_host": "{{ env `REMOTE_HOST` }}",
+    "remote_datastore": "{{ env `REMOTE_DATASTORE` }}",
+    "remote_username": "{{ env `REMOTE_USERNAME` }}",
+    "remote_password": "{{ env `REMOTE_PASSWORD` }}"
   },
 
   "builders": [
     {
-      "type": "virtualbox-iso",
+      "type": "vmware-iso",
       "vm_name": "{{ user `name` }}",
       "output_directory": "output-{{ user `name` }}-{{ timestamp }}",
 
@@ -40,14 +45,19 @@
       "boot_wait": "10s",
 
       "disk_size": 40960,
-      "vboxmanage": [
-        [ "modifyvm", "{{.Name}}", "--memory", "1024" ],
-        [ "modifyvm", "{{.Name}}", "--cpus", "1" ],
-        [ "modifyvm", "{{.Name}}", "--hwvirtex", "on" ]
-      ],
+      "vmx_data": {
+        "memsize": "4096",
+        "numvcpus": "4",
+        "ethernet0.networkName": "VM Network"
+      },
+      "remote_type": "esx5",
+      "remote_host": "{{ user `remote_host` }}",
+      "remote_datastore": "{{ user `remote_datastore` }}",
+      "remote_username": "{{ user `remote_username` }}",
+      "remote_password": "{{ user `remote_password` }}",  
 
-      "guest_os_type": "Ubuntu_64",
-      "guest_additions_path": "/tmp/VBoxGuestAdditions_{{ .Version }}.iso",
+      "guest_os_type": "ubuntu-64",
+      "tools_upload_flavor": "linux",
 
       "http_directory": "http",
 
@@ -62,24 +72,24 @@
       "headless": "true"
     }
   ],
-  
-  "post-processors": [
-    {
-      "type": "vagrant",
-      "output": "../builds/{{ .Provider }}/{{ user `name` }}.box"
-    }
-  ],
-  
+
   "provisioners": [
-    { 
+    {
       "type": "shell",      
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "environment_vars": ["BOXNAME={{ user `name` }}"],
       "scripts": [
         "scripts/ubuntu/sudoers.sh",
         "scripts/ubuntu/networking.sh",
         "scripts/common/sshd.sh",
         "scripts/common/vagrant.sh",
         "scripts/common/tools.sh",
+
+        "scripts/ubuntu/hostname.sh",
+        "scripts/ubuntu/iptables.sh",
+        "scripts/ubuntu/openjdk.sh",
+        "scripts/ubuntu/virtualbox.sh",
+
         "scripts/ubuntu/cleanup.sh"
       ]
     }

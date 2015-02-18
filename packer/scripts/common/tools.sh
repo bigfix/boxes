@@ -9,17 +9,24 @@ if [[ $PACKER_BUILDER_TYPE =~ virtualbox ]]; then
 fi
 
 if [[ $PACKER_BUILDER_TYPE =~ vmware ]]; then
-	if grep -q -i "release 6" /etc/redhat-release ; then
-		yum erase -y fuse
+	if [[ -f /etc/redhat-release ]]; then
+		if grep -q -i "release 6" /etc/redhat-release ; then
+			yum erase -y fuse
+		fi
+	elif [[ -f /etc/lsb-release ]]; then
+		if grep -q -i "Ubuntu" /etc/lsb-release; then
+			apt-get update
+			apt-get install -y open-vm-tools
+			exit $?
+		fi
 	fi
-
 
 	if [[ -f /tmp/linux.iso ]]; then
 		tools=/tmp/linux.iso
 	else
 		tools=/dev/cdrom
 	fi
-	cd /tmp
+
 	mkdir -p /mnt/cdrom
 	mount -o loop $tools /mnt/cdrom
 	tar zxf /mnt/cdrom/VMwareTools-*.tar.gz -C /tmp/
