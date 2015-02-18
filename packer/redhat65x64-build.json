@@ -33,7 +33,7 @@
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "2048" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "1" ]
-      ],      
+      ],
 
       "guest_os_type": "RedHat_64",
       "guest_additions_path": "/tmp/VBoxGuestAdditions_{{ .Version }}.iso",

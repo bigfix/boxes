@@ -25,7 +25,7 @@
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "2048" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "1" ]
-      ],      
+      ],
 
       "guest_os_type": "RedHat_64",
       "guest_additions_path": "/tmp/VBoxGuestAdditions_{{ .Version }}.iso",
@@ -52,8 +52,8 @@
   ],
   
   "provisioners": [
-    { 
-      "type": "shell",      
+    {
+      "type": "shell",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "environment_vars": ["BIGFIX_VERSION={{ user `bigfix_version` }}", "DB2_VERSION={{ user `db2_version` }}"],
       "scripts": [
