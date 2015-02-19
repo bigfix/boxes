@@ -7,7 +7,7 @@ target=$1
 
 expected_version=$(get $target)
 
-if [[ $target -eq "virtualbox" ]]; then
+if [[ "$target" -eq "virtualbox" ]]; then
 	actual_version=$(vboxmanage --version)
 
 	major_version=$(sed -rn 's/^virtualbox\t([0-9]*\.[0-9]*)\..*$/\1/p' $dir/VERSIONS)
@@ -19,7 +19,7 @@ if [[ $target -eq "virtualbox" ]]; then
 	if [[ "$actual_version" -ne "$expected_version" ]]; then
 		bump virtualbox $actual_version
 	fi
-elif [[ $target -eq "packer" ]]; then
+elif [[ "$target" -eq "packer" ]]; then
 	actual_version=""
 	if command -v packer 2>&1 >/dev/null; then
 		action_version=$(packer --version | grep -oE '[0-9\.]*')
