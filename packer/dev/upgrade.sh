@@ -7,7 +7,7 @@ target=$1
 
 expected_version=$(get $target)
 
-if [[ "$target" -eq "virtualbox" ]]; then
+if [[ "$target" = "virtualbox" ]]; then
 	actual_version=$(vboxmanage --version)
 
 	major_version=$(sed -rn 's/^virtualbox\t([0-9]*\.[0-9]*)\..*$/\1/p' $dir/VERSIONS)
@@ -19,7 +19,7 @@ if [[ "$target" -eq "virtualbox" ]]; then
 	if [[ "$actual_version" -ne "$expected_version" ]]; then
 		bump virtualbox $actual_version
 	fi
-elif [[ "$target" -eq "packer" ]]; then
+elif [[ "$target" = "packer" ]]; then
 	actual_version=""
 	if command -v packer 2>&1 >/dev/null; then
 		action_version=$(packer --version | grep -oE '[0-9\.]*')
@@ -28,7 +28,7 @@ elif [[ "$target" -eq "packer" ]]; then
 	latest_version=$(curl -sS https://packer.io/downloads.html | \
 		sed -nr 's#^.*Latest version: ([0-9\.]*).*$#\1#p')
 
-	if [[ -n "$actual_version" || "$latest_version" -ne "$expected_version" ]]; then
+	if [[ -n $actual_version || "$latest_version" != "$expected_version" ]]; then
 		rm -f /opt/packer/*
 		sudo rm -f /usr/local/bin/packer*
 
