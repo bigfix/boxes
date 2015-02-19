@@ -22,7 +22,7 @@ if [[ "$target" = "virtualbox" ]]; then
 elif [[ "$target" = "packer" ]]; then
 	actual_version=""
 	if command -v packer 2>&1 >/dev/null; then
-		action_version=$(packer version | grep -oE '[0-9\.]*')
+		actual_version=$(packer version | grep -oE '[0-9\.]*')
 	fi
 
 	latest_version=$(curl -sS https://packer.io/downloads.html | \
