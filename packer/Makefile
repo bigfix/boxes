@@ -11,5 +11,11 @@ check-provider = $(shell packer inspect -machine-readable $(t) | \
 VBOXTEMPLATES := $(foreach t, $(TEMPLATES), $(call check-provider,"virtualbox-iso"))
 $(foreach t, $(VBOXTEMPLATES), $(eval $(call make-target,$(t))))
 
-.PHONY: all
+.PHONY: all packer virtualbox
 all: $(VBOXTEMPLATES)
+
+packer:
+	dev/upgrade.sh packer
+
+virtualbox:
+	dev/upgrade.sh virtualbox
