@@ -1,7 +1,7 @@
 #!/bin/bash
 
 dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-. $dir/bump.sh
+. $dir/util.source.sh
 
 target=$1
 
@@ -22,13 +22,13 @@ if [[ "$target" = "virtualbox" ]]; then
 elif [[ "$target" = "packer" ]]; then
 	actual_version=""
 	if command -v packer 2>&1 >/dev/null; then
-		action_version=$(packer --version | grep -oE '[0-9\.]*')
+		action_version=$(packer version | grep -oE '[0-9\.]*')
 	fi
 
 	latest_version=$(curl -sS https://packer.io/downloads.html | \
 		sed -nr 's#^.*Latest version: ([0-9\.]*).*$#\1#p')
 
-	if [[ -n $actual_version || "$latest_version" != "$expected_version" ]]; then
+	if [[ -z $actual_version || "$latest_version" != "$expected_version" ]]; then
 		rm -f /opt/packer/*
 		sudo rm -f /usr/local/bin/packer*
 
