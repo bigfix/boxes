@@ -1,6 +1,8 @@
 define make-target
-$(1): $(shell grep -oE '[^"]+\.sh' $(1)) $(join http,$(shell grep -oE '[^"\{}]+\.cfg' $(1) | uniq))
-	$$(eval v = $$(shell dev/bump.sh $$(basename $$@)))
+../builds/virtualbox/$$(basename $(1)).box: $(1) \
+		$(shell grep -oE '[^"]+\.sh' $(1)) \
+		$(join http,$(shell grep -oE '[^"\{}]+\.cfg' $(1) | uniq))
+	$$(eval v = $$(shell dev/bump.sh $$(basename $(1))))
 	@packer build -only=virtualbox-iso -force $$@
 endef
 
