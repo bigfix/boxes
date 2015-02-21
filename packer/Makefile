@@ -3,7 +3,7 @@ define make-target
 		$(shell grep -oE '[^"]+\.sh' $(1)) \
 		$(join http,$(shell grep -oE '[^"\{}]+\.cfg' $(1) | uniq))
 	$$(eval v = $$(shell dev/bump.sh $$(basename $(1))))
-	@packer build -only=virtualbox-iso -force $$@
+	@packer build -only=virtualbox-iso -force $(1)
 endef
 
 TEMPLATES := $(wildcard *.json)
