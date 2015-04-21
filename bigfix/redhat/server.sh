@@ -32,14 +32,14 @@ function fix_wr {
 rm -f ServerInstaller_*-rhe6.x86_64.tgz
 
 custom=$(find /vagrant -maxdepth 1 -type f -name 'ServerInstaller_*-rhe6.x86_64.tgz' -print -quit)
-install_wr=true
+wr_port="80"
 if [[ -n $custom ]]; then
 	cp $custom .
-	[[ $custom =~ ServerInstaller_42\.1\.*-rhe6\.x86_64\.tgz ]] && install_wr=false
+	[[ $custom =~ ServerInstaller_42\.1\.*-rhe6\.x86_64\.tgz ]] && wr_port="8080"
 else
 	version=${1:-$BIGFIX_VERSION}
 	major_version=`echo "$version" | sed -r -n 's/([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-9]+)/\1\.\2/p'`
-	[[ $major_version == "42.1" ]] && major_version="WebConsole" && install_wr=false
+	[[ $major_version == "42.1" ]] && major_version="WebConsole" && wr_port="8080"
 
 	is_ok "http://builds.sfolab.ibm.com/$major_version/$version/" || exit 1
 
@@ -62,6 +62,7 @@ LA_ACCEPT="true"
 IS_EVALUATION="false"
 USE_PROXY="false"
 COMPONENT_SRV="true"
+COMPONENT_WR="true"
 SINGLE_DATABASE="true"
 LOCAL_DATABASE="true"
 BES_WWW_FOLDER="/var/opt/BESServer"
@@ -86,15 +87,9 @@ WEBUI_REDIRECT="true"
 WEBUI_REDIRECT_PORT="80"
 OHANA_MEANS_FAMILY
 
-if $install_wr; then
-	echo 'COMPONENT_WR="true"' >> /home/vagrant/iem.rsp
-else
-	echo 'COMPONENT_WR="false"' >> /home/vagrant/iem.rsp
-fi
-
 sh ServerInstaller_*-rhe6.x86_64/install.sh -f /home/vagrant/iem.rsp || true
 
 is_ok "https://localhost:52311/api/help" true || exit 1
-$install_wr && (is_ok "http://localhost/webreports" || fix_wr || exit 1)
+is_ok "http://localhost:${wr_port}/webreports" || fix_wr || exit 1
 
 rm -rf ServerInstaller_*-rhe6.x86_64
