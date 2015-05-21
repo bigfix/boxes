@@ -129,6 +129,7 @@
         "../bigfix/redhat/6/hostname.sh",
         "../bigfix/redhat/6/iptables.sh",
         "../bigfix/redhat/6/openjdk.sh",
+        "../bigfix/redhat/6/git.sh",
         "../bigfix/common/p4.sh"
       ]
     },
