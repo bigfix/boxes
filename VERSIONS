@@ -3,3 +3,4 @@ virtualbox	4.3.22
 redhat65x64-build	1.0.2
 redhat65x64-db2	1.0.1
 redhat70x64-db2	1.0.1
+redhat70x64-server92	9.2.3
