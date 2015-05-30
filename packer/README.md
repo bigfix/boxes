@@ -11,9 +11,9 @@ This section documents how [bigfix/boxes](https://github.com/bigfix/boxes) can b
 
 ### virtualbox-iso
 #### -db2
-This example uses the [`redhat65x64-db2.json`](redhat65x64-db2.json) template.
+This example uses the [`redhat70x64-db2.json`](redhat70x64-db2.json) template.
 
-This examples creates a box with the 9.2.1.48 IBM Endpoint Manager Root Server. First, it creates a Red Hat Enterprise Linux 6.5 x86_64 base box with DB2 10.5 FP3. Then, it provisions the base with the Root Server. The iso, application, and license are hosted on an internal web server.
+This examples creates a box with the 9.2.3.68 IBM Endpoint Manager Root Server. First, it creates a Red Hat Enterprise Linux 7.0 x86_64 base box with DB2 10.5 FP3. Then, it provisions the base with the Root Server. The iso, application, and license are hosted on an internal web server.
 
 On `stitch`:
 
@@ -24,7 +24,7 @@ $ packer build redhat70x64-db2.json
 $ cd -
 $ vagrant box add builds/virtualbox/redhat70x64-db2.box --name bigfix/redhat70x64-db2
 $ cd vagrant/ready/redhat
-$ BIGFIX_VERSION="9.2.1.48" vagrant up
+$ BIGFIX_VERSION="9.2.3.68" vagrant up
 ```
 
 #### -server
@@ -37,7 +37,7 @@ On `stitch`:
 ```bash
 $ git clone git@github.com:bigfix/boxes.git
 $ cd boxes/packer
-$ BIGFIX_VERSION="9.2.1.48" packer build redhat70x64-server.json
+$ BIGFIX_VERSION="9.2.3.68" packer build redhat70x64-server.json
 ```
 
 ### vmware-iso

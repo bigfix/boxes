@@ -31,17 +31,17 @@ The Vagrantfiles are designed to be as atomic as possible. Specifically, the spe
 This section documents how this repository can be used within the [bigfix](http://platdev.sfolab.ibm.com/) organization.
 
 ### Example
-The following examples start a box with the 9.2.1.48 IBM Endpoint Manager Root Server on a Red Hat Enterprise Linux 7.0 x86_64 and DB2 10.5 FP3 system.
+The following examples start a box with the 9.2.3.68 IBM Endpoint Manager Root Server on a Red Hat Enterprise Linux 7.0 x86_64 and DB2 10.5 FP3 system.
 
-This example installs the 9.2.1.48 IBM Endpoint Manager Root Server on start up.
+This example installs the 9.2.3.68 IBM Endpoint Manager Root Server on start up.
 
 ```bash
 $ git clone git@github.com:bigfix/boxes.git
 $ cd vagrant/server/redhat
-$ BIGFIX_VERSION="9.2.1.48" vagrant up
+$ BIGFIX_VERSION="9.2.3.68" vagrant up
 ```
 
-This example starts a box with the 9.2.1.48 IBM Endpoint Manager Root Server already installed:
+This example starts a box with the 9.2.3.68 IBM Endpoint Manager Root Server already installed:
 
 ```bash
 $ git clone git@github.com:bigfix/boxes.git
