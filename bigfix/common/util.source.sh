@@ -28,9 +28,11 @@ function download {
 	local package="$2"
 
 	local major_version=`echo "$version" | sed -r -n 's/([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-9]+)/\1\.\2/p'`
-	[[ $major_version == "42.1" ]] && major_version="WebConsole" && wr_port="8080"
+	[[ $major_version == "42.1" ]] && major_version="WebConsole"
 
 	is_ok "http://builds.sfolab.ibm.com/$major_version/$version/" || exit 1
 
 	curl -sO "http://builds.sfolab.ibm.com/$major_version/$version/Unix/$package"
+
+	echo $major_version
 }

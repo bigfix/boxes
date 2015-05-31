@@ -18,7 +18,8 @@ if [[ -n $custom ]]; then
 	[[ $custom =~ ServerInstaller_42\.1\.*-rhe6\.x86_64\.tgz ]] && wr_port="8080"
 else
 	version=${1:-$BIGFIX_VERSION}
-	download $version "ServerInstaller_$version-rhe6.x86_64.tgz"
+	major_version=$(download $version "ServerInstaller_$version-rhe6.x86_64.tgz")
+	[[ $major_version == "WebConsole" ]] && wr_port="8080"
 fi
 
 tar -xzf ServerInstaller_*-rhe6.x86_64.tgz

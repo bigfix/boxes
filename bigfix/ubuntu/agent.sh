@@ -4,7 +4,7 @@
 . <(curl -s https://raw.githubusercontent.com/bigfix/boxes/master/bigfix/common/util.source.sh)
 
 version=${1:-$BIGFIX_VERSION}
-download $version "BESAgent-$version-ubuntu10.amd64.deb"
+download $version "BESAgent-$version-ubuntu10.amd64.deb" >/dev/null
 
 root_server=${2:-$BIGFIX_ROOT}
 
