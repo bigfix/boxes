@@ -36,3 +36,17 @@ function download {
 
 	echo $major_version
 }
+
+function get_agent {
+	local version="$1"
+
+	local package=""
+
+	if [[ -f /etc/lsb-release ]]; then
+		if grep -q -i "Ubuntu" /etc/lsb-release; then
+			package="BESAgent-$version-ubuntu10.amd64.deb"
+		fi
+	fi
+
+	echo $package
+}
