@@ -30,7 +30,7 @@ major_version=`echo "$version" | sed -r -n 's/([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-
 
 is_ok "http://builds.sfolab.ibm.com/$major_version/$version/" || exit 1
 
-curl -O "http://builds.sfolab.ibm.com/$major_version/$version/Unix/BESAgent-$version-ubuntu10.amd64.deb"
+curl -sO "http://builds.sfolab.ibm.com/$major_version/$version/Unix/BESAgent-$version-ubuntu10.amd64.deb"
 
 root_server=${2:-$BIGFIX_ROOT}
 
