@@ -1,0 +1,41 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+BIGFIX_AGENT="https://raw.githubusercontent.com/bigfix/boxes/master/bigfix/ubuntu/agent.sh"
+BIGFIX_VERSION=ENV["BIGFIX_VERSION"] || "9.2.3.68"
+BIGFIX_ROOT=ENV["BIGFIX_ROOT"] || "bigfix.test:52311"
+
+OHANA=ENV["OHANA"] || false
+AVAHI="https://raw.githubusercontent.com/bigfix/boxes/master/vagrant/ready/scripts/avahi.sh"
+AVAHI_INSTALL="https://raw.githubusercontent.com/bigfix/boxes/master/packer/scripts/ubuntu/avahi.sh"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "ubuntu/trusty64"
+  config.vm.hostname = "bigfix-agent.test"
+
+  config.vm.provider "virtualbox" do |v, override|
+    v.gui = false
+    v.customize ["modifyvm", :id, "--memory", 512]
+    v.customize ["modifyvm", :id, "--cpus", 1]
+
+    # http://serverfault.com/questions/495914/vagrant-slow-internet-connection-in-guest
+    v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+  end
+
+  if OHANA
+    config.vm.network :private_network, type: "dhcp"
+
+    [AVAHI_INSTALL, AVAHI].each do |script|
+      config.vm.provision "shell" do |s|
+        s.path = script
+      end
+    end
+  end
+
+  config.vm.provision "shell" do |s|
+    s.path = BIGFIX_AGENT
+    s.args = [BIGFIX_VERSION, BIGFIX_ROOT]
+  end
+end
