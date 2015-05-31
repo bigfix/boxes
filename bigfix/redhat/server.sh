@@ -18,12 +18,7 @@ if [[ -n $custom ]]; then
 	[[ $custom =~ ServerInstaller_42\.1\.*-rhe6\.x86_64\.tgz ]] && wr_port="8080"
 else
 	version=${1:-$BIGFIX_VERSION}
-	major_version=`echo "$version" | sed -r -n 's/([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-9]+)/\1\.\2/p'`
-	[[ $major_version == "42.1" ]] && major_version="WebConsole" && wr_port="8080"
-
-	is_ok "http://builds.sfolab.ibm.com/$major_version/$version/" || exit 1
-
-	curl -sO "http://builds.sfolab.ibm.com/$major_version/$version/Unix/ServerInstaller_$version-rhe6.x86_64.tgz"
+	download $version "ServerInstaller_$version-rhe6.x86_64.tgz"
 fi
 
 tar -xzf ServerInstaller_*-rhe6.x86_64.tgz
