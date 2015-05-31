@@ -3,6 +3,9 @@
 
 VAGRANTFILE_API_VERSION = "2"
 
+OHANA=ENV["OHANA"] || false
+AVAHI="https://raw.githubusercontent.com/bigfix/boxes/master/vagrant/ready/scripts/avahi.sh"
+
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "bigfix/redhat70x64-server92"
   config.vm.hostname = "bigfix.test"
@@ -18,4 +21,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.network :forwarded_port, guest: 52311, host: 52311
   config.vm.network :forwarded_port, guest: 80, host: 8080
+
+  if OHANA
+    config.vm.network :private_network, type: "dhcp"
+
+    config.vm.provision "shell" do |s|
+      s.path = AVAHI
+    end
+  end
 end
