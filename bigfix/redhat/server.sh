@@ -1,4 +1,5 @@
 #!/bin/bash -eux
+# Usage: server.sh VERSION
 
 function is_ok {
 	local url="$1"
