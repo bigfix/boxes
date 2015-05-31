@@ -12,9 +12,17 @@ AVAHI="https://raw.githubusercontent.com/bigfix/boxes/master/vagrant/ready/scrip
 AVAHI_INSTALL="https://raw.githubusercontent.com/bigfix/boxes/master/packer/scripts/ubuntu/avahi.sh"
 SSHD="https://raw.githubusercontent.com/bigfix/boxes/master/vagrant/ready/scripts/sshd.sh"
 
+def bigfix_provision(config, platforms)
+  platforms.each do |platform|
+    config.vm.provision "shell" do |s|
+      s.path = platform
+      s.args = [BIGFIX_VERSION, BIGFIX_ROOT]
+    end
+  end
+end
+
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu/trusty64"
-  config.vm.hostname = "bigfix-agent.test"
 
   config.vm.provider "virtualbox" do |v, override|
     v.gui = false
@@ -28,15 +36,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   if OHANA
     config.vm.network :private_network, type: "dhcp"
 
-    [AVAHI_INSTALL, AVAHI, SSHD].each do |script|
+    [SSHD, AVAHI_INSTALL, AVAHI].each do |script|
       config.vm.provision "shell" do |s|
         s.path = script
       end
     end
   end
 
-  config.vm.provision "shell" do |s|
-    s.path = BIGFIX_AGENT
-    s.args = [BIGFIX_VERSION, BIGFIX_ROOT]
+  config.vm.define "agent", autostart: false do |agent|
+    agent.vm.hostname = "bigfix-agent.test"
+
+    bigfix_provision agent, [BIGFIX_AGENT]
   end
 end
