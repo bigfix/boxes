@@ -1,4 +1,4 @@
 #!/bin/bash -eux
 
-echo "UseDNS no" >> /etc/ssh/sshd_config
+echo -e "\nUseDNS no" >> /etc/ssh/sshd_config
 service ssh restart
