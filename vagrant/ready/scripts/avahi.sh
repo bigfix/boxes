@@ -12,5 +12,6 @@ cat > /etc/mdns.allow << OHANA_MEANS_FAMILY
 OHANA_MEANS_FAMILY
 
 sed -i 's/^\(hosts:.*\)$/\1 mdns/' /etc/nsswitch.conf
+sed -i 's/^\(hosts:.*\)mdns[46]_minimal \(.*\)$/\1\2/' /etc/nsswitch.conf
 
 service avahi-daemon restart
