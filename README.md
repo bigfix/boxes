@@ -49,5 +49,31 @@ $ cd vagrant/server/redhat/9.2
 $ vagrant up
 ```
 
+#### [ohana](https://youtu.be/-U0xGBNl2fE)
+The Vagrantfiles at [`vagrant/server`](vagrant/server) and [`vagrant/ready`](vagrant/ready) have an `OHANA` environment variable option to add platforms to a `BIGFIX_ROOT` environment. This configuration is disabled by default and can be enabled by:
+
+```bash
+$ OHANA=1 vagrant up
+```
+
+#### Example
+The following example creates a 9.2.3.68 IBM Endpoint Manager environment with:
+
+1. Root Server on a Red Hat Enterprise Linux 7.0 x86_64 and DB2 10.5 FP3 system.
+
+        $ git clone git@github.com:bigfix/boxes.git
+        $ cd vagrant/server/redhat/9.2
+        $ OHANA=1 vagrant up
+
+2. Relay on a [CentOS 6.6 x86_64](https://atlas.hashicorp.com/chef/boxes/centos-6.6) system.
+
+        $ cd vagrant/ready/centos
+        $ OHANA=1 vagrant up relay
+
+3. Agent on a [Ubuntu 14.04 x86_64](https://atlas.hashicorp.com/ubuntu/boxes/trusty64) system.
+
+        $ cd vagrant/ready/ubuntu
+        $ OHANA=1 vagrant up agent
+
 # Support
 Any issues or questions regarding this software should be filed via [GitHub issues](https://github.com/bigfix/boxes/issues).
