@@ -1,0 +1,51 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+BIGFIX_AGENT="https://raw.githubusercontent.com/bigfix/boxes/master/bigfix/common/agent.sh"
+BIGFIX_VERSION=ENV["BIGFIX_VERSION"] || "9.2.3.68"
+BIGFIX_ROOT=ENV["BIGFIX_ROOT"] || "bigfix.test:52311"
+
+OHANA=ENV["OHANA"] || false
+YUM="https://raw.githubusercontent.com/bigfix/boxes/master/packer/scripts/centos/6/yum.sh"
+AVAHI="https://raw.githubusercontent.com/bigfix/boxes/master/vagrant/ready/scripts/avahi.sh"
+AVAHI_INSTALL="https://raw.githubusercontent.com/bigfix/boxes/master/packer/scripts/centos/avahi.sh"
+
+def bigfix_provision(config, platforms)
+  platforms.each do |platform|
+    config.vm.provision "shell" do |s|
+      s.path = platform
+      s.args = [BIGFIX_VERSION, BIGFIX_ROOT]
+    end
+  end
+end
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "chef/centos-6.6"
+
+  config.vm.provider "virtualbox" do |v, override|
+    v.gui = false
+    v.customize ["modifyvm", :id, "--memory", 512]
+    v.customize ["modifyvm", :id, "--cpus", 1]
+
+    # http://serverfault.com/questions/495914/vagrant-slow-internet-connection-in-guest
+    v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+  end
+
+  if OHANA
+    config.vm.network :private_network, type: "dhcp"
+
+    [YUM, AVAHI_INSTALL, AVAHI].each do |script|
+      config.vm.provision "shell" do |s|
+        s.path = script
+      end
+    end
+  end
+
+  config.vm.define "agent", autostart: false do |agent|
+    agent.vm.hostname = "bigfix-centos-agent.test"
+
+    bigfix_provision agent, [BIGFIX_AGENT]
+  end
+end
