@@ -4,6 +4,7 @@
 VAGRANTFILE_API_VERSION = "2"
 
 BIGFIX_AGENT="https://raw.githubusercontent.com/bigfix/boxes/master/bigfix/common/agent.sh"
+BIGFIX_RELAY="https://raw.githubusercontent.com/bigfix/boxes/master/bigfix/common/relay.sh"
 BIGFIX_VERSION=ENV["BIGFIX_VERSION"] || "9.2.3.68"
 BIGFIX_ROOT=ENV["BIGFIX_ROOT"] || "bigfix.test:52311"
 
@@ -47,5 +48,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     agent.vm.hostname = "bigfix-centos-agent.test"
 
     bigfix_provision agent, [BIGFIX_AGENT]
+  end
+
+  config.vm.define "relay", autostart: false do |relay|
+    relay.vm.hostname = "bigfix-centos-relay.test"
+
+    bigfix_provision relay, [BIGFIX_AGENT, BIGFIX_RELAY]
   end
 end
