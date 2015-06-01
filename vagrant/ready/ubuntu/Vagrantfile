@@ -8,9 +8,9 @@ BIGFIX_VERSION=ENV["BIGFIX_VERSION"] || "9.2.3.68"
 BIGFIX_ROOT=ENV["BIGFIX_ROOT"] || "bigfix.test:52311"
 
 OHANA=ENV["OHANA"] || false
+SSHD="https://raw.githubusercontent.com/bigfix/boxes/master/vagrant/ready/scripts/sshd.sh"
 AVAHI="https://raw.githubusercontent.com/bigfix/boxes/master/vagrant/ready/scripts/avahi.sh"
 AVAHI_INSTALL="https://raw.githubusercontent.com/bigfix/boxes/master/packer/scripts/ubuntu/avahi.sh"
-SSHD="https://raw.githubusercontent.com/bigfix/boxes/master/vagrant/ready/scripts/sshd.sh"
 
 def bigfix_provision(config, platforms)
   platforms.each do |platform|
