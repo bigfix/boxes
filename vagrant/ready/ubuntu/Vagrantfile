@@ -44,7 +44,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.define "agent", autostart: false do |agent|
-    agent.vm.hostname = "bigfix-agent.test"
+    agent.vm.hostname = "bigfix-ubuntu-agent.test"
 
     bigfix_provision agent, [BIGFIX_AGENT]
   end
