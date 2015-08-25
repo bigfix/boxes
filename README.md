@@ -36,7 +36,7 @@ The following examples start a box with the 9.2.3.68 IBM Endpoint Manager Root S
 This example installs the 9.2.3.68 IBM Endpoint Manager Root Server on start up.
 
 ```bash
-$ git clone git@github.com:bigfix/boxes.git
+$ git clone https://github.com/bigfix/boxes.git
 $ cd vagrant/server/redhat
 $ BIGFIX_VERSION="9.2.3.68" vagrant up
 ```
@@ -44,7 +44,7 @@ $ BIGFIX_VERSION="9.2.3.68" vagrant up
 This example starts a box with the 9.2.3.68 IBM Endpoint Manager Root Server already installed:
 
 ```bash
-$ git clone git@github.com:bigfix/boxes.git
+$ git clone https://github.com/bigfix/boxes.git
 $ cd vagrant/server/redhat/9.2
 $ vagrant up
 ```
@@ -61,7 +61,7 @@ The following example creates a 9.2.3.68 IBM Endpoint Manager environment with:
 
 1. Root Server on a Red Hat Enterprise Linux 7.0 x86_64 and DB2 10.5 FP3 system.
 
-        $ git clone git@github.com:bigfix/boxes.git
+        $ git clone https://github.com/bigfix/boxes.git
         $ cd vagrant/server/redhat/9.2
         $ OHANA=1 vagrant up
 

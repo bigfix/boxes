@@ -18,7 +18,7 @@ This examples creates a box with the 9.2.3.68 IBM Endpoint Manager Root Server. 
 On `stitch`:
 
 ```bash
-$ git clone git@github.com:bigfix/boxes.git
+$ git clone https://github.com/bigfix/boxes.git
 $ cd boxes/packer
 $ packer build redhat70x64-db2.json
 $ cd -
@@ -35,7 +35,7 @@ Unlike [-db2](#-db2), this example creates a base with the Root Server already i
 On `stitch`:
 
 ```bash
-$ git clone git@github.com:bigfix/boxes.git
+$ git clone https://github.com/bigfix/boxes.git
 $ cd boxes/packer
 $ BIGFIX_VERSION="9.2.3.68" packer build redhat70x64-server.json
 ```
@@ -111,7 +111,7 @@ This example uses the [`redhat65x64-build.json`](redhat65x64-build.json) templat
 On `stitch`:
 
 ```bash
-$ git clone git@github.com:bigfix/boxes.git
+$ git clone https://github.com/bigfix/boxes.git
 $ cd boxes/packer
 $ REMOTE_HOST={host} REMOTE_DATASTORE={datastore} REMOTE_USERNAME={username} REMOTE_PASSWORD={password} packer build --only=vmware-iso redhat65x64-build.json
 ```
