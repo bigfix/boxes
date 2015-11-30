@@ -41,7 +41,7 @@ $ cd vagrant/server/redhat
 $ BIGFIX_VERSION="9.2.3.68" vagrant up
 ```
 
-This example starts a box with the 9.2.3.68 IBM Endpoint Manager Root Server already installed:
+This example starts a box with the 9.2.6.94 IBM Endpoint Manager Root Server already installed:
 
 ```bash
 $ git clone https://github.com/bigfix/boxes.git
@@ -57,7 +57,7 @@ $ OHANA=1 vagrant up
 ```
 
 #### Example
-The following example creates a 9.2.3.68 IBM Endpoint Manager environment with:
+The following example creates a 9.2.6.94 IBM Endpoint Manager environment with:
 
 1. Root Server on a Red Hat Enterprise Linux 7.0 x86_64 and DB2 10.5 FP3 system.
 
