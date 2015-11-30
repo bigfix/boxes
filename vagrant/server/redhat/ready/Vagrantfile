@@ -4,7 +4,7 @@
 VAGRANTFILE_API_VERSION = "2"
 
 BIGFIX_SERVER="https://raw.githubusercontent.com/bigfix/boxes/master/bigfix/redhat/server.sh"
-BIGFIX_VERSION=[ENV["BIGFIX_VERSION"] || "9.2.3.68"]
+BIGFIX_VERSION=[ENV["BIGFIX_VERSION"] || "9.2.6.94"]
 
 OHANA=ENV["OHANA"] || false
 AVAHI="https://raw.githubusercontent.com/bigfix/boxes/master/vagrant/ready/scripts/avahi.sh"
