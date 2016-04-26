@@ -25,6 +25,7 @@ The templates are created with hardcoded values for internal usage. However, the
 Each template has variables at the top for configuring the name and iso. And as previously mentioned, a template may have provisioner scripts that require specific applications. These scripts will be located in the [`bigfix/`](bigfix/) folder.
 
 #### Vagrantfile
+Current default bigfix version is 9.2.7.53
 The Vagrantfiles are designed to be as atomic as possible. Specifically, the specifications of the box should be encapsulated in the file. If a box requires configuration, it can be be specified via editing the top of the Vagrantfile and/or providing an environment variable.
 
 ## bigfix
