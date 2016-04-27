@@ -25,23 +25,23 @@ The templates are created with hardcoded values for internal usage. However, the
 Each template has variables at the top for configuring the name and iso. And as previously mentioned, a template may have provisioner scripts that require specific applications. These scripts will be located in the [`bigfix/`](bigfix/) folder.
 
 #### Vagrantfile
+Current default bigfix version is 9.2.7.53
 The Vagrantfiles are designed to be as atomic as possible. Specifically, the specifications of the box should be encapsulated in the file. If a box requires configuration, it can be be specified via editing the top of the Vagrantfile and/or providing an environment variable.
 
 ## bigfix
 This section documents how this repository can be used within the [bigfix](http://platdev.sfolab.ibm.com/) organization.
 
 ### Example
-The following examples start a box with the 9.2.3.68 IBM Endpoint Manager Root Server on a Red Hat Enterprise Linux 7.0 x86_64 and DB2 10.5 FP3 system.
+The following examples start a box with the 9.2.7.53 IBM Endpoint Manager Root Server on a Red Hat Enterprise Linux 7.0 x86_64 and DB2 10.5 FP3 system.
 
-This example installs the 9.2.3.68 IBM Endpoint Manager Root Server on start up.
+This example installs the 9.2.7.53 IBM Endpoint Manager Root Server on start up.
 
 ```bash
 $ git clone https://github.com/bigfix/boxes.git
 $ cd vagrant/server/redhat
-$ BIGFIX_VERSION="9.2.3.68" vagrant up
+$ BIGFIX_VERSION="9.2.7.53" vagrant up
 ```
-
-This example starts a box with the 9.2.6.94 IBM Endpoint Manager Root Server already installed:
+This example starts a box with the 9.2.7.53 IBM Endpoint Manager Root Server already installed:
 
 ```bash
 $ git clone https://github.com/bigfix/boxes.git
@@ -57,7 +57,7 @@ $ OHANA=1 vagrant up
 ```
 
 #### Example
-The following example creates a 9.2.6.94 IBM Endpoint Manager environment with:
+The following example creates a 9.2.7.53 IBM Endpoint Manager environment with:
 
 1. Root Server on a Red Hat Enterprise Linux 7.0 x86_64 and DB2 10.5 FP3 system.
 
