@@ -41,7 +41,6 @@ $ git clone https://github.com/bigfix/boxes.git
 $ cd vagrant/server/redhat
 $ BIGFIX_VERSION="9.2.7.53" vagrant up
 ```
-
 This example starts a box with the 9.2.7.53 IBM Endpoint Manager Root Server already installed:
 
 ```bash
