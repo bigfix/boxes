@@ -11,7 +11,7 @@ function fix_wr {
 
 rm -f ServerInstaller_*-rhe6.x86_64.tgz
 
-custom=$(find /vagrant -maxdepth 1 -type f -name 'ServerInstaller_*-rhe6.x86_64.tgz' -print -quit)
+custom=$(if [ -d /vagrant ]; then find /vagrant -maxdepth 1 -type f -name 'ServerInstaller_*-rhe6.x86_64.tgz' -print -quit; fi)
 wr_port="80"
 if [[ -n $custom ]]; then
 	cp $custom .
